@@ -162,7 +162,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .hero__beeld { grid-column: 8 / span 5; position: relative; z-index: 1; }
 .hero__beeld .telefoon { width: 318px; margin: -44px 142px 0 auto; }
 .strepen { position: absolute; right: 40px; bottom: 0; width: 384px; height: 272px; color: var(--teal); z-index: 0; }
-.bronkaart { position: absolute; z-index: 3; left: -172px; top: 352px; width: 256px; background: var(--zilver); color: var(--kool); border-radius: 18px; padding: 16px 20px 18px; }
+.bronkaart { position: absolute; z-index: 3; left: -172px; top: 352px; width: 256px; background: var(--zilver); color: var(--kool); border-radius: 18px; padding: 16px 20px 18px; box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 0 18px 36px rgba(0, 0, 0, 0.3); }
 .bronkaart .label { color: var(--kool); font-size: 11px; letter-spacing: 0.14em; margin: 0 0 8px; }
 .bronkaart__getal { display: flex; align-items: baseline; gap: 10px; }
 .bronkaart__getal b { font-family: var(--f-kop); font-weight: 400; font-size: 48px; line-height: 50px; }
@@ -170,8 +170,12 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .bronkaart .bron { margin-top: 8px; font-size: 13px; }
 
 /* ---------- telefoon ---------- */
-.telefoon { position: relative; aspect-ratio: 402 / 874; background: #0d0d0d; border-radius: 15% / 6.9%; padding: 3.3%; box-shadow: inset 0 0 0 1.5px #3b3b3e; }
-.telefoon img { width: 100%; height: 100%; object-fit: cover; border-radius: 12.4% / 5.7%; }
+/* telefoon: maten uit het ontwerp (toestel 317 x 667, hoek 53, scherm 10 px vanaf de rand met hoek 43,
+   rand 1 px Zilver Wit op 22 procent, zachte schaduw rondom) */
+.telefoon { position: relative; aspect-ratio: 317 / 667; background: #000; border-radius: 16.72% / 7.95%; padding: 3.155%;
+  box-shadow: inset 0 0 0 1px rgba(232, 239, 245, 0.22), 0 0 30px rgba(0, 0, 0, 0.55), 0 16px 40px rgba(0, 0, 0, 0.25); }
+.telefoon img { width: 100%; height: 100%; object-fit: cover; border-radius: 14.48% / 6.65%; display: block; }
+.vlak:not(.donker) .telefoon, .pers__item .telefoon { box-shadow: inset 0 0 0 1px rgba(232, 239, 245, 0.22), 0 0 24px rgba(49, 47, 47, 0.28), 0 14px 32px rgba(49, 47, 47, 0.18); }
 
 /* ---------- secties ---------- */
 .sectie { padding-top: 96px; padding-bottom: 96px; }
@@ -214,7 +218,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .drie .telefoon { position: absolute; width: 38%; }
 .drie .t1 { left: 4%; top: 6%; }
 .drie .t3 { right: 0; top: 6%; }
-.drie .t2 { left: 50%; transform: translateX(-46%); top: 0; width: 42%; z-index: 2; }
+.drie .t2 { left: 50%; margin-left: -19.3%; top: 0; width: 42%; z-index: 2; }
 
 .film-blok { margin-top: 80px; background: var(--teal); color: var(--kool); }
 .film { padding-top: 64px; padding-bottom: 64px; display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--tussen); align-items: start; }
@@ -352,11 +356,6 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .fout-404 .slogan { font-size: 200px; line-height: 180px; }
 .fout-404 .tekst { margin: 24px 0 36px; max-width: 560px; }
 
-/* ---------- verschijnen bij scrollen (snel, geen gimmick) ---------- */
-.js .opkomst { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1); }
-.js .opkomst.is-zichtbaar { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) { .js .opkomst { opacity: 1; transform: none; } }
-
 /* =========================================================
    Breekpunten: 1280 (kleine laptop), 1024 (tablet liggend),
    820 (tablet), 600 en kleiner (mobiel, ontwerp op 402)
@@ -385,7 +384,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   .app__tekst { grid-column: 1 / span 7; }
   .app__beeld { grid-column: 8 / span 5; }
   .drie .t1, .drie .t3 { display: none; }
-  .drie .t2 { width: 82%; left: 50%; transform: translateX(-50%); }
+  .drie .t2 { width: 82%; left: 50%; margin-left: -41%; }
   .film__tekst { grid-column: 1 / -1; }
   .film__tekst .knop { margin-top: 0; }
   .film__beeld { grid-column: 1 / -1; margin-top: 40px; }
@@ -421,7 +420,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   .app__tekst, .app__beeld { grid-column: 1 / -1; }
   .app__beeld { margin-top: 48px; min-height: 0; }
   .drie { min-height: 0; display: flex; justify-content: center; gap: 4%; }
-  .drie .telefoon { position: relative; inset: auto; transform: none; }
+  .drie .telefoon { position: relative; inset: auto; margin-left: 0; }
   .drie .t1 { display: block; width: 46%; }
   .drie .t2 { width: 46%; left: auto; }
   .drie .t3 { display: none; }
@@ -539,3 +538,84 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .fout-404 { margin-bottom: 16px; }
 .bronkaart__getal { flex-wrap: nowrap; white-space: nowrap; }
 @media (max-width: 1024px) and (min-width: 601px) { .bronkaart { width: 256px; } }
+
+
+/* =========================================================
+   Beweging: snel, zacht uitlopen, een kleine pop. Subtiel.
+   ========================================================= */
+:root { --uit: cubic-bezier(0.22, 1, 0.36, 1); --pop: cubic-bezier(0.34, 1.45, 0.64, 1); }
+
+/* bij scrollen: elk blok komt zacht omhoog, lijsten na elkaar */
+.js .opkomst { opacity: 0; transform: translateY(28px) scale(0.985); transition: opacity 0.6s var(--uit), transform 0.7s var(--uit); transition-delay: calc(var(--i, 0) * 80ms); }
+.js .opkomst.is-zichtbaar { opacity: 1; transform: none; }
+
+/* hero bij laden */
+.js .hero .label, .js .hero__intro, .js .hero .stores, .js .feiten { opacity: 0; transform: translateY(18px); transition: opacity 0.6s var(--uit), transform 0.7s var(--uit); }
+.js .hero__slogan .sloganregel > span { display: block; opacity: 0; transform: translateY(36px); transition: opacity 0.5s var(--uit), transform 0.8s var(--uit); }
+.js .hero__beeld .telefoon { opacity: 0; transform: translateY(70px) rotate(-3deg); transition: opacity 0.6s var(--uit), transform 1s var(--pop); }
+.js .bronkaart { opacity: 0; transform: translate(-24px, 10px) scale(0.86); transform-origin: right center; transition: opacity 0.4s var(--uit), transform 0.6s var(--pop); }
+.js .hero > .strepen { transform: translate(60px, 60px); opacity: 0; transition: transform 1s var(--uit), opacity 0.6s var(--uit); }
+.is-geladen .hero .label { opacity: 1; transform: none; transition-delay: 0.05s; }
+.is-geladen .hero__slogan .sloganregel > span { opacity: 1; transform: none; }
+.is-geladen .hero__slogan .sloganregel:nth-child(2) > span { transition-delay: 0.09s; }
+.is-geladen .hero__intro { opacity: 1; transform: none; transition-delay: 0.25s; }
+.is-geladen .hero .stores { opacity: 1; transform: none; transition-delay: 0.35s; }
+.is-geladen .feiten { opacity: 1; transform: none; transition-delay: 0.45s; }
+.is-geladen .hero__beeld .telefoon { opacity: 1; transform: none; transition-delay: 0.15s; }
+.is-geladen .bronkaart { opacity: 1; transform: none; transition-delay: 0.7s; }
+.is-geladen .hero > .strepen { opacity: 1; transform: none; transition-delay: 0.3s; }
+.is-geladen .hero__beeld .telefoon.zweeft { animation: zweven 7s ease-in-out 1.4s infinite; }
+@keyframes zweven { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+/* paginakop op de andere pagina's */
+.js .pagina-kop .label, .js .pagina-kop .kop, .js .pagina-kop .tekst { opacity: 0; transform: translateY(20px); transition: opacity 0.6s var(--uit), transform 0.7s var(--uit); }
+.js .pagina-kop .strepen { opacity: 0; transform: translate(50px, 50px); transition: opacity 0.6s var(--uit), transform 0.9s var(--uit); }
+.is-geladen .pagina-kop .label { opacity: 1; transform: none; }
+.is-geladen .pagina-kop .kop { opacity: 1; transform: none; transition-delay: 0.08s; }
+.is-geladen .pagina-kop .tekst { opacity: 1; transform: none; transition-delay: 0.18s; }
+.is-geladen .pagina-kop .strepen { opacity: 1; transform: none; transition-delay: 0.2s; }
+
+/* de drie telefoons: de buitenste schuiven achter de middelste vandaan */
+.js .drie .t1, .js .drie .t3 { opacity: 0; transition: opacity 0.5s var(--uit), transform 0.9s var(--pop); }
+.js .drie .t1 { transform: translateX(45%) scale(0.92); }
+.js .drie .t3 { transform: translateX(-45%) scale(0.92); }
+.js .drie .t2 { transform: translateY(40px); opacity: 0; transition: opacity 0.5s var(--uit), transform 0.8s var(--pop); }
+.is-zichtbaar .drie .t2 { transform: none; opacity: 1; }
+.is-zichtbaar .drie .t1, .is-zichtbaar .drie .t3 { transform: none; opacity: 1; transition-delay: 0.25s; }
+
+/* filmbeeld: de kaart en de vraag komen er los in */
+.js .speler__kaart { transform: translateY(14px) scale(0.96); opacity: 0; transition: opacity 0.5s var(--uit), transform 0.7s var(--pop); transition-delay: 0.2s; }
+.js .speler__vraag { transform: translateY(14px); opacity: 0; transition: opacity 0.5s var(--uit), transform 0.7s var(--uit); transition-delay: 0.32s; }
+.js .speler__play { transform: scale(0.6); opacity: 0; transition: opacity 0.4s var(--uit), transform 0.6s var(--pop), background-color var(--overgang); transition-delay: 0.45s; }
+.is-zichtbaar .speler__kaart, .is-zichtbaar .speler__vraag { transform: none; opacity: 1; }
+.is-zichtbaar .speler__play { transform: none; opacity: 1; }
+.is-zichtbaar .speler:hover .speler__play { transform: scale(1.1); transition-delay: 0s; }
+
+/* hover en tik: klein en snel */
+.kaart, .pers__item { transition: transform 0.35s var(--uit), border-color var(--overgang); }
+.kaart:hover, .pers__item:hover { transform: translateY(-4px); border-color: #AEB8C2; }
+.store, .knop { transition: background-color var(--overgang), color var(--overgang), border-color var(--overgang), transform 0.25s var(--pop); }
+.store:hover { transform: translateY(-2px); }
+.store:active, .knop:active { transform: scale(0.97); }
+.speler { transition: transform 0.4s var(--uit); }
+.speler:hover { transform: translateY(-3px); }
+.functies li .icoon, .beloftes li .icoon { transition: transform 0.35s var(--pop); }
+.functies li:hover .icoon, .beloftes li:hover .icoon { transform: scale(1.12); }
+.voet__slogan .slogan svg { transition: transform 0.4s var(--pop); }
+.voet__slogan:hover .slogan svg { transform: translateX(6px); }
+
+/* vensters poppen open */
+.venster[open] .venster__in > div, .venster[open] .kaartje { animation: venster-in 0.45s var(--pop); }
+.venster[open]::backdrop { animation: waas-in 0.3s ease; }
+@keyframes venster-in { from { opacity: 0; transform: translateY(16px) scale(0.94); } to { opacity: 1; transform: none; } }
+@keyframes waas-in { from { opacity: 0; } to { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .js .opkomst, .js .hero .label, .js .hero__intro, .js .hero .stores, .js .feiten, .js .hero__beeld .telefoon, .js .bronkaart, .js .hero > .strepen,
+  .js .pagina-kop .label, .js .pagina-kop .kop, .js .pagina-kop .tekst, .js .pagina-kop .strepen, .js .drie .telefoon,
+  .js .speler__kaart, .js .speler__vraag, .js .speler__play { opacity: 1 !important; transform: none !important; }
+  .js .hero__slogan .sloganregel > span { opacity: 1 !important; transform: none !important; }
+  .hero__beeld .telefoon.zweeft { animation: none !important; }
+}
+
+.hero__slogan .sloganregel { display: block; }

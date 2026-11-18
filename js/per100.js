@@ -46,12 +46,25 @@
     d.addEventListener("close", function () { document.body.style.overflow = ""; });
   });
 
+  // ---------- beweging bij laden ----------
+  var rustig = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function geladen() { document.body.classList.add("is-geladen"); }
+  requestAnimationFrame(function () { requestAnimationFrame(geladen); });
+  setTimeout(geladen, 120);
+  var heroTel = document.querySelector(".hero__beeld .telefoon");
+  if (heroTel && !rustig) heroTel.classList.add("zweeft");
+
+  // lijsten komen na elkaar binnen
+  document.querySelectorAll("[data-na-elkaar]").forEach(function (g) {
+    Array.prototype.forEach.call(g.children, function (c, i) { c.classList.add("opkomst"); c.style.setProperty("--i", i); });
+  });
+
   // ---------- verschijnen bij scrollen ----------
   var stukken = document.querySelectorAll(".opkomst");
-  if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  if ("IntersectionObserver" in window && !rustig) {
     var io = new IntersectionObserver(function (items) {
       items.forEach(function (it) { if (it.isIntersecting) { it.target.classList.add("is-zichtbaar"); io.unobserve(it.target); } });
-    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    }, { rootMargin: "0px 0px -10% 0px", threshold: 0.12 });
     stukken.forEach(function (s) { io.observe(s); });
   } else {
     stukken.forEach(function (s) { s.classList.add("is-zichtbaar"); });
