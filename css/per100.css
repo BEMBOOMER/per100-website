@@ -172,9 +172,9 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 /* ---------- telefoon ---------- */
 /* telefoon: maten uit het ontwerp (toestel 317 x 667, hoek 53, scherm 10 px vanaf de rand met hoek 43,
    rand 1 px Zilver Wit op 22 procent, zachte schaduw rondom) */
-.telefoon { position: relative; aspect-ratio: 317 / 667; background: #000; border-radius: 16.72% / 7.95%; padding: 3.155%;
+.telefoon { position: relative; aspect-ratio: 317 / 667; background: #000; border-radius: 16.72% / 7.95%; padding: 0;
   box-shadow: inset 0 0 0 1px rgba(232, 239, 245, 0.22), 0 0 30px rgba(0, 0, 0, 0.55), 0 16px 40px rgba(0, 0, 0, 0.25); }
-.telefoon img { width: 100%; height: 100%; object-fit: cover; border-radius: 14.48% / 6.65%; display: block; }
+.telefoon img { position: absolute; left: 3.155%; top: 1.499%; width: 93.69%; height: 97.002%; max-width: none; max-height: none; object-fit: cover; border-radius: 14.48% / 6.65%; display: block; }
 .vlak:not(.donker) .telefoon, .pers__item .telefoon { box-shadow: inset 0 0 0 1px rgba(232, 239, 245, 0.22), 0 0 24px rgba(49, 47, 47, 0.28), 0 14px 32px rgba(49, 47, 47, 0.18); }
 
 /* ---------- secties ---------- */
@@ -533,7 +533,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .pers__item .voorbeeld { overflow: hidden; }
 .pers__item .voorbeeld img { width: auto; height: auto; max-width: 80%; max-height: 110px; object-fit: contain; }
 .pers__item .voorbeeld .telefoon { width: 46%; }
-.pers__item .voorbeeld .telefoon img { max-width: none; max-height: none; width: 100%; height: 100%; }
+.pers__item .voorbeeld .telefoon img { max-width: none; max-height: none; width: 93.69%; height: 97.002%; }
 .fout-404 > * { justify-self: start; }
 .fout-404 { margin-bottom: 16px; }
 .bronkaart__getal { flex-wrap: nowrap; white-space: nowrap; }
