@@ -179,20 +179,25 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 
 /* ---------- secties ---------- */
 .sectie { padding-top: 96px; padding-bottom: 96px; }
-.sectie__kop { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--tussen); align-items: end; }
-.sectie__kop .label { grid-column: 1 / -1; margin-bottom: 8px; }
-.sectie__kop .kop { grid-column: 1 / span 7; }
-.sectie__kop .tekst { grid-column: 9 / span 4; }
+.sectie__kop { display: grid; grid-template-columns: repeat(12, 1fr); column-gap: var(--tussen); align-items: start; }
+.sectie__kop .label { grid-column: 1 / -1; margin-bottom: 14px; }
+.sectie__kop .kop { grid-column: 1 / span 8; }
+.sectie__kop .tekst { grid-column: 1 / span 6; margin-top: 24px; }
+
+/* elk onderdeel begint als een etiket: dikke lijn in Kool Zwart, daaronder het label met een teal blokje */
+.sectie--etiket .sectie__kop { border-top: 4px solid var(--kool); padding-top: 22px; }
+.sectie--etiket .sectie__kop .label { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+.sectie--etiket .sectie__kop .label::before { content: ""; width: 10px; height: 10px; background: var(--teal); flex: none; }
 
 .waarom .kop { align-self: start; }
-.waarom .tekst { grid-column: 9 / span 4; align-self: start; margin-top: 8px; }
-.waarden { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: var(--tussen); border-top: 1.5px solid var(--lijn); margin-top: 80px; }
+.waarom .tekst { grid-column: 1 / span 6; }
+.waarden { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: var(--tussen); border-top: 1.5px solid var(--lijn); margin-top: 64px; }
 .waarde { padding: 22px 0 28px; }
 .waarde + .waarde { border-left: 1px solid var(--lijn); padding-left: 12px; }
 .waarde p { margin-top: 10px; }
 
-.bron-sectie { padding-top: 0; }
-.bron-sectie .tekst { font-size: 16px; line-height: 24px; align-self: end; margin-bottom: 6px; }
+.bron-sectie { padding-top: 40px; }
+.bron-sectie .tekst { font-size: 18px; line-height: 28px; }
 .kaarten { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--tussen); margin-top: 52px; }
 .kaart { border: 1.5px solid var(--lijn); border-radius: 22px; padding: 32px 32px 40px; display: flex; flex-direction: column; min-height: 360px; }
 .kaart .icoon { width: 40px; height: 40px; margin-bottom: 30px; }
