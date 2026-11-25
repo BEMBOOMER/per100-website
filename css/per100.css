@@ -185,7 +185,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .sectie__kop .tekst { grid-column: 1 / span 6; margin-top: 24px; }
 
 /* elk onderdeel begint als een etiket: dikke lijn in Kool Zwart, daaronder het label met een teal blokje */
-.sectie--etiket .sectie__kop { border-top: 4px solid var(--kool); padding-top: 22px; }
+.sectie--etiket .sectie__kop { border-top: 4px solid var(--kool); padding-top: 46px; margin-top: -24px; }
 .sectie--etiket .sectie__kop .label { display: flex; align-items: center; gap: 10px; font-size: 14px; }
 .sectie--etiket .sectie__kop .label::before { content: ""; width: 10px; height: 10px; background: var(--teal); flex: none; }
 
