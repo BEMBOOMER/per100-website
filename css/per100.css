@@ -640,4 +640,6 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .privacy { padding-bottom: 80px; }
 @media (max-width: 760px) {
   .vlak > .wrap { padding-left: var(--marge); padding-right: var(--marge); }
+  /* telefoons en filmkaart op volle breedte, anders klappen ze in tot 0 */
+  .app__beeld, .film__beeld { align-self: stretch; width: 100%; }
 }
