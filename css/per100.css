@@ -624,3 +624,18 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 }
 
 .hero__slogan .sloganregel { display: block; }
+
+/* Blokken in plaats van dunne lijnen (25 november 2026) */
+.feiten { border-top: 0; padding-top: 0; gap: 10px; }
+.feit, .feit + .feit { background: rgba(232, 239, 245, 0.07); border: 0; border-radius: 16px; padding: 14px 20px 16px; }
+.waarden { border-top: 0; gap: var(--tussen); }
+.waarde, .waarde + .waarde { background: #F6F9FB; border: 0; border-radius: 22px; padding: 24px 26px 28px; }
+.functies { display: grid; gap: 10px; }
+.functies li, .functies li:last-child { background: rgba(232, 239, 245, 0.07); border: 0; border-radius: 18px; padding: 20px 22px 22px; }
+.beloftes { display: grid; gap: 10px; }
+.beloftes li, .beloftes li:last-child { background: #F6F9FB; border: 0; border-radius: 18px; padding: 18px 20px 20px; }
+@media (max-width: 760px) {
+  .feiten { grid-template-columns: repeat(3, 1fr); }
+  .feit, .feit + .feit { padding: 12px 14px 14px; }
+  .waarden { grid-template-columns: 1fr; gap: 10px; margin-top: 40px; }
+}
