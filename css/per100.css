@@ -710,3 +710,31 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .ex-dias.is-groot .ex-dias__balk { width: min(100%, calc((100vh - 96px) * 16 / 9)); color: var(--zilver); }
 .ex-dias.is-groot .ex-dias__balk .knop--tweede { display: none; }
 html.ex-vast, html.ex-vast body { overflow: hidden; }
+.ex-dia-beeld { position: absolute; z-index: 2; display: none; padding: 0; border: 0; background: transparent; cursor: zoom-in; border-radius: 8px; transition: box-shadow var(--overgang); }
+.ex-dia-beeld.is-actief { display: block; }
+.ex-dia-beeld:hover, .ex-dia-beeld:focus-visible { box-shadow: 0 0 0 3px var(--teal); outline: none; }
+.ex-lb { position: absolute; inset: 0; z-index: 5; background: rgba(20, 19, 19, 0.94); display: flex; align-items: center; justify-content: center; padding: 4% 6% 7%; }
+.ex-lb[hidden] { display: none; }
+.ex-dias__beeld .ex-lb img { position: static; inset: auto; opacity: 1; width: auto; height: auto; max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 10px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+.ex-lb__titel { position: absolute; left: 0; right: 0; bottom: 2.4%; text-align: center; color: var(--zilver); font-weight: 700; }
+.ex-lb__dicht { position: absolute; top: 2.5%; right: 2%; }
+/* Presentatie: los van de achtergrond, met een Zilver Wit balk in het midden */
+#presentatie .ex-kop { margin: 0 auto 40px; text-align: center; }
+#presentatie .ex-kop .tekst { margin-left: auto; margin-right: auto; }
+.ex-dias__beeld { box-shadow: 0 0 0 1px var(--lijn-zwart), 0 30px 80px rgba(0, 0, 0, 0.55); }
+.ex-dias__balk { width: fit-content; max-width: 100%; margin: 24px auto 0; padding: 8px 10px; gap: 10px; justify-content: center; background: var(--zilver); color: var(--kool); border-radius: 999px; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35); }
+.ex-dias__balk .knop { margin-left: 0 !important; height: 48px; border-radius: 999px; }
+.ex-dias__balk [data-teller] { color: var(--kool); }
+.ex-dias__balk .ex-pijl { width: 48px; height: 48px; border-color: var(--kool); color: var(--kool); }
+.ex-dias__balk .ex-pijl:hover { background: var(--kool); border-color: var(--kool); color: var(--zilver); }
+.ex-blok.donker .ex-dias__balk .knop--tweede { border-color: var(--kool); color: var(--kool); }
+.ex-blok.donker .ex-dias__balk .knop--tweede:hover { background: var(--zilver-hover); }
+.ex-dias:fullscreen .ex-dias__balk, .ex-dias.is-groot .ex-dias__balk { width: fit-content; color: var(--kool); margin-top: 14px; }
+.ex-lb__dicht { border-color: var(--zilver); color: var(--zilver); }
+@media (max-width: 760px) { .ex-dias__balk { border-radius: 24px; } }
+#presentatie { overflow: hidden; }
+.ex-dias { position: relative; }
+.ex-dias::before { content: ""; position: absolute; left: -100vmax; right: -100vmax; top: 18%; bottom: 34%; background: var(--zilver); z-index: 0; }
+.ex-dias > * { position: relative; z-index: 1; }
+.ex-dias:fullscreen::before, .ex-dias.is-groot::before { display: none; }
+.ex-dias.is-groot > .ex-dias__beeld, .ex-dias:fullscreen > .ex-dias__beeld { position: relative; }

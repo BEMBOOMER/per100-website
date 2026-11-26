@@ -115,13 +115,21 @@
 (function () {
   var box = document.querySelector('[data-dias]'); if (!box) return;
   var dias = box.querySelectorAll('[data-dia]'), vids = box.querySelectorAll('[data-bij]'), teller = box.querySelector('[data-teller]'), nu = 0;
-  function toon(i) { nu = (i + dias.length) % dias.length;
+  var lb = box.querySelector('[data-lb]'), lbImg = box.querySelector('[data-lb-img]'), lbTitel = box.querySelector('[data-lb-titel]'), groep = [], gi = 0;
+  function lbToon(k) { gi = k; var b = groep[gi]; lbImg.src = b.getAttribute('data-src'); lbImg.alt = b.getAttribute('data-titel'); lbTitel.textContent = b.getAttribute('data-titel') + (groep.length > 1 ? '  ·  ' + (gi + 1) + ' / ' + groep.length : ''); }
+  function lbOpen(b) { groep = [].slice.call(box.querySelectorAll('.ex-dia-beeld[data-groep="' + b.getAttribute('data-groep') + '"]')); lb.hidden = false; lbToon(+b.getAttribute('data-i')); }
+  function lbDicht() { lb.hidden = true; lbImg.removeAttribute('src'); }
+  [].forEach.call(box.querySelectorAll('.ex-dia-beeld'), function (b) { b.addEventListener('click', function () { lbOpen(b); }); });
+  box.querySelector('[data-lb-dicht]').addEventListener('click', lbDicht);
+  lb.addEventListener('click', function (e) { if (e.target === lb) lbDicht(); });
+  function stap(r) { if (!lb.hidden) { var k = gi + r; if (k < 0 || k >= groep.length) lbDicht(); else lbToon(k); return; } toon(nu + r); }
+  function toon(i) { nu = (i + dias.length) % dias.length; if (lb && !lb.hidden) lbDicht();
     for (var k = 0; k < dias.length; k++) dias[k].classList.toggle('is-actief', k === nu);
-    for (var v = 0; v < vids.length; v++) { var aan = +vids[v].getAttribute('data-bij') === nu; vids[v].classList.toggle('is-actief', aan); var el = vids[v].querySelector('video'); if (!aan && !el.paused) el.pause(); }
+    for (var v = 0; v < vids.length; v++) { var aan = +vids[v].getAttribute('data-bij') === nu; vids[v].classList.toggle('is-actief', aan); var el = vids[v].querySelector('video'); if (el && !aan && !el.paused) el.pause(); }
     teller.textContent = (nu + 1) + ' / ' + dias.length;
     var volgende = dias[(nu + 1) % dias.length]; if (volgende.loading === 'lazy') volgende.loading = 'eager'; }
-  box.querySelector('[data-vorige]').addEventListener('click', function () { toon(nu - 1); });
-  box.querySelector('[data-volgende]').addEventListener('click', function () { toon(nu + 1); });
+  box.querySelector('[data-vorige]').addEventListener('click', function () { stap(-1); });
+  box.querySelector('[data-volgende]').addEventListener('click', function () { stap(1); });
   var groot = box.querySelector('[data-groot]');
   function knop() { if (groot) groot.textContent = (document.fullscreenElement || box.classList.contains('is-groot')) ? 'Sluiten' : 'Volledig scherm'; }
   function venster(aan) { box.classList.toggle('is-groot', aan); document.documentElement.classList.toggle('ex-vast', aan); knop(); }
@@ -133,11 +141,11 @@
     try { var p = f.call(box); if (p && p.catch) p.catch(function () { venster(true); }); } catch (e) { venster(true); }
     setTimeout(function () { if (!document.fullscreenElement && !box.classList.contains('is-groot')) venster(true); }, 450); });
   document.addEventListener('fullscreenchange', knop);
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && box.classList.contains('is-groot')) venster(false); });
+  document.addEventListener('keydown', function (e) { if (e.key !== 'Escape') return; if (lb && !lb.hidden) { lbDicht(); e.stopPropagation(); return; } if (box.classList.contains('is-groot')) venster(false); });
   document.addEventListener('keydown', function (e) {
     if (e.target && /VIDEO|INPUT|TEXTAREA/.test(e.target.tagName)) { if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return; }
     var r = box.getBoundingClientRect(); if (!document.fullscreenElement && !box.classList.contains('is-groot') && (r.bottom < 0 || r.top > innerHeight)) return;
-    if (e.key === 'ArrowRight' || e.key === 'PageDown' || (e.key === ' ' && (document.fullscreenElement || box.classList.contains('is-groot')))) { e.preventDefault(); toon(nu + 1); }
-    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); toon(nu - 1); } });
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || (e.key === ' ' && (document.fullscreenElement || box.classList.contains('is-groot')))) { e.preventDefault(); stap(1); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); stap(-1); } });
   toon(0);
 })();
