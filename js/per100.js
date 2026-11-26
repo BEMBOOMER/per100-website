@@ -110,3 +110,34 @@
     });
   }
 })();
+
+/* Examen: dia's van de presentatie doorbladeren, met de video's op hun plek en op volledig scherm */
+(function () {
+  var box = document.querySelector('[data-dias]'); if (!box) return;
+  var dias = box.querySelectorAll('[data-dia]'), vids = box.querySelectorAll('[data-bij]'), teller = box.querySelector('[data-teller]'), nu = 0;
+  function toon(i) { nu = (i + dias.length) % dias.length;
+    for (var k = 0; k < dias.length; k++) dias[k].classList.toggle('is-actief', k === nu);
+    for (var v = 0; v < vids.length; v++) { var aan = +vids[v].getAttribute('data-bij') === nu; vids[v].classList.toggle('is-actief', aan); var el = vids[v].querySelector('video'); if (!aan && !el.paused) el.pause(); }
+    teller.textContent = (nu + 1) + ' / ' + dias.length;
+    var volgende = dias[(nu + 1) % dias.length]; if (volgende.loading === 'lazy') volgende.loading = 'eager'; }
+  box.querySelector('[data-vorige]').addEventListener('click', function () { toon(nu - 1); });
+  box.querySelector('[data-volgende]').addEventListener('click', function () { toon(nu + 1); });
+  var groot = box.querySelector('[data-groot]');
+  function knop() { if (groot) groot.textContent = (document.fullscreenElement || box.classList.contains('is-groot')) ? 'Sluiten' : 'Volledig scherm'; }
+  function venster(aan) { box.classList.toggle('is-groot', aan); document.documentElement.classList.toggle('ex-vast', aan); knop(); }
+  if (groot) groot.addEventListener('click', function () {
+    if (document.fullscreenElement) { document.exitFullscreen(); return; }
+    if (box.classList.contains('is-groot')) { venster(false); return; }
+    var f = box.requestFullscreen || box.webkitRequestFullscreen;
+    if (!f) { venster(true); return; }
+    try { var p = f.call(box); if (p && p.catch) p.catch(function () { venster(true); }); } catch (e) { venster(true); }
+    setTimeout(function () { if (!document.fullscreenElement && !box.classList.contains('is-groot')) venster(true); }, 450); });
+  document.addEventListener('fullscreenchange', knop);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && box.classList.contains('is-groot')) venster(false); });
+  document.addEventListener('keydown', function (e) {
+    if (e.target && /VIDEO|INPUT|TEXTAREA/.test(e.target.tagName)) { if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return; }
+    var r = box.getBoundingClientRect(); if (!document.fullscreenElement && !box.classList.contains('is-groot') && (r.bottom < 0 || r.top > innerHeight)) return;
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || (e.key === ' ' && (document.fullscreenElement || box.classList.contains('is-groot')))) { e.preventDefault(); toon(nu + 1); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); toon(nu - 1); } });
+  toon(0);
+})();
