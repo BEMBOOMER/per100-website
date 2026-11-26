@@ -744,3 +744,5 @@ html.ex-vast, html.ex-vast body { overflow: hidden; }
 .ex-lb__zoom { position: absolute; left: 2%; bottom: 1.6%; display: flex; gap: 8px; }
 .ex-lb__zoom .ex-pijl { width: 44px; height: 44px; font-size: 18px; border-color: var(--zilver); color: var(--zilver); }
 .ex-lb__zoom .ex-pijl[data-zoom="0"] { font-size: 12px; font-weight: 700; }
+.ex-blok:not(.donker) .ex-video figcaption { color: var(--tekst-zacht); }
+.ex-blok.donker .ex-beeld figcaption { color: var(--tekst-zacht-zwart); }

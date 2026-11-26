@@ -130,8 +130,11 @@
   function stopSlepen() { sleep = null; vlak.classList.remove('is-slepen'); }
   vlak.addEventListener('pointerup', stopSlepen); vlak.addEventListener('pointercancel', stopSlepen);
   [].forEach.call(box.querySelectorAll('[data-zoom]'), function (k) { k.addEventListener('click', function () { var d = +k.getAttribute('data-zoom'); if (d === 0) herstel(); else zoomOp(z * (d > 0 ? 1.5 : 1 / 1.5)); }); });
+  lbImg.addEventListener('load', function () { var r = lbImg.naturalHeight / lbImg.naturalWidth; if (r < 2) return;
+    var vb = vlak.getBoundingClientRect(), ib = lbImg.getBoundingClientRect(); var doel = Math.min(vb.width * (r > 6 ? 0.45 : 0.9), 1400);
+    var nz = Math.max(1, doel / ib.width); z = nz; tx = (vb.width - ib.width * nz) / 2 - (ib.left - vb.left); ty = vb.top - ib.top + 8; zet(); });
   function lbToon(k) { herstel(); gi = k; var b = groep[gi]; lbImg.src = b.getAttribute('data-src'); lbImg.alt = b.getAttribute('data-titel'); lbTitel.textContent = b.getAttribute('data-titel') + (groep.length > 1 ? '  ·  ' + (gi + 1) + ' / ' + groep.length : ''); }
-  function lbOpen(b) { groep = [].slice.call(box.querySelectorAll('.ex-dia-beeld[data-groep="' + b.getAttribute('data-groep') + '"]')); lb.hidden = false; lbToon(+b.getAttribute('data-i')); }
+  function lbOpen(b) { groep = [].slice.call(box.querySelectorAll('.ex-dia-beeld[data-groep="' + b.getAttribute('data-groep') + '"]')).sort(function (x, y) { return x.getAttribute('data-i') - y.getAttribute('data-i'); }); lb.hidden = false; lbToon(+b.getAttribute('data-i')); }
   function lbDicht() { lb.hidden = true; lbImg.removeAttribute('src'); }
   [].forEach.call(box.querySelectorAll('.ex-dia-beeld'), function (b) { b.addEventListener('click', function () { lbOpen(b); }); });
   box.querySelector('[data-lb-dicht]').addEventListener('click', lbDicht);
